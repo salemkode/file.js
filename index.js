@@ -16,7 +16,7 @@ module.exports = class file {
                 async (element) =>
                   await thisClass.info(fixPath(dir + "/" + element))
               )
-            ).then( files_details => resolve(files_details));
+            ).then(files_details => resolve(files_details));
           } else resolve(files);
         }
       });
@@ -78,9 +78,12 @@ module.exports = class file {
       });
     });
   }
+
+  fixPath = fixPath
 };
 
 
 function fixPath(paths) {
-  return path.join(paths.replace("./", path.join(__dirname, "") + "/"));
+  let root = path.dirname(require.main.filename || process.mainModule.filename);
+  return path.join( paths.replace("./", root + "/"));
 }
